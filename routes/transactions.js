@@ -1,5 +1,15 @@
 var mongo = require('mongodb');
 
+function findAllByKey(obj, keyToFind) {
+    return Object.entries(obj)
+      .reduce((acc, [key, value]) => (key === keyToFind)
+        ? acc.concat(value)
+        : (typeof value === 'object' && value)
+        ? acc.concat(findAllByKey(value, keyToFind))
+        : acc
+      , []) || [];
+  }
+  
 var Server = mongo.Server,
     Db = mongo.Db,
     BSON = mongo.BSONPure;
@@ -29,13 +39,61 @@ exports.findById = function(req, res) {
     });
 };
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 exports.findAll = function(req, res) {
-    db.collection('transactions', function(err, collection) {
-        collection.find().toArray(function(err, items) {
-            res.send(items);
+
+    var filters = req.query.year //2018
+    console.log(filters)
+    if(filters ==null){
+        db.collection('transactions', function(err, collection) {
+            collection.find().toArray(function(err, items) {
+                res.send(items);
+            });
         });
-    });
+    }else{
+
+
+
+        db.collection('transactions', function(err, collection) {
+            collection.find().toArray(function(err, items) {
+                res.send(items[0]);
+            });
+        });
+    }
+    
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -114,6 +172,7 @@ var populateDB = function() {
         TransactionId:"172",
         targetAccount: "178347861376",
         sourceAccount: "136471361389",
+        year: "2018",
         time: "2018-03-09T12:34:00Z",
         category: "eating_out",
         amount: "-50"
@@ -121,6 +180,7 @@ var populateDB = function() {
     {
         TransactionId:"192",
         targetAccount: "136471361389",
+        year:"2019",
         sourceAccount: "178347861376",
         time: "2019-03-10T12:34:00Z",
         category: "salary",
