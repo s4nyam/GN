@@ -23,5 +23,5 @@ app.put('/transactions/:id', transaction.updatetransaction);
 app.delete('/transactions/:id', transaction.deletetransaction);
 
 // app.listen(3000);
-app.listen(3000||process.env.port);
+app.listen(3000||process.env.PORT);
 console.log('Listening on port 3000...');
