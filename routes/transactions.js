@@ -14,12 +14,14 @@ var Server = mongo.Server,
     Db = mongo.Db,
     BSON = mongo.BSONPure;
 
-var server = new Server('localhost', 27017, {auto_reconnect: true});
-db = new Db('transactiondb', server);
+// var server = new Server('localhost', 27017, {auto_reconnect: true});
+// var server = new Server('process.env.MONGODB_URI', 55787, {auto_reconnect: true});
+var server = new Server('mongodb://heroku_blss8xgp:jm8vu885720jpfdc5liqcfm6s6@ds255787.mlab.com', 55787, {auto_reconnect: true});
+db = new Db('heroku_blss8xgp', server);
 
 db.open(function(err, db) {
     if(!err) {
-        console.log("Connected to 'transactiondb' database");
+        console.log("Connected to 'heroku_blss8xgp' database");
         db.collection('transactions', {strict:true}, function(err, collection) {
             if (err) {
                 console.log("The 'transactions' collection doesn't exist. Creating it with sample data...");
