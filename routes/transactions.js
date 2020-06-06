@@ -171,22 +171,22 @@ var populateDB = function() {
 
     var transactions = [
     {
-        TransactionId:"172",
-        targetAccount: "178347861376",
-        sourceAccount: "136471361389",
-        year: "2018",
-        time: "2018-03-09T12:34:00Z",
-        category: "eating_out",
-        amount: "-50"
+        "TransactionId":"172",
+        "targetAccount": "178347861376",
+        "sourceAccount": "136471361389",
+        "year": "2018",
+        "time": "2018-03-09T12:34:00Z",
+        "category": "eating_out",
+        "amount": "-50"
     },
     {
-        TransactionId:"192",
-        targetAccount: "136471361389",
-        year:"2019",
-        sourceAccount: "178347861376",
-        time: "2019-03-10T12:34:00Z",
-        category: "salary",
-        amount: "200"
+        "TransactionId":"192",
+        "targetAccount": "136471361389",
+        "year":"2019",
+        "sourceAccount": "178347861376",
+        "time": "2019-03-10T12:34:00Z",
+        "category": "salary",
+        "amount": "200"
     }];
 
     db.collection('transactions', function(err, collection) {
