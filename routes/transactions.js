@@ -1,5 +1,5 @@
 var mongo = require('mongodb');
-
+var MongoClient = require('mongodb').MongoClient;
 function findAllByKey(obj, keyToFind) {
     return Object.entries(obj)
       .reduce((acc, [key, value]) => (key === keyToFind)
@@ -13,11 +13,13 @@ function findAllByKey(obj, keyToFind) {
 var Server = mongo.Server,
     Db = mongo.Db,
     BSON = mongo.BSONPure;
-
+var url = 'mongodb://heroku_blss8xgp:jm8vu885720jpfdc5liqcfm6s6@ds255787.mlab.com:55787/heroku_blss8xgp';
 // var server = new Server('localhost', 27017, {auto_reconnect: true});
 // var server = new Server('process.env.MONGODB_URI', 55787, {auto_reconnect: true});
-var server = new Server('mongodb://heroku_blss8xgp:jm8vu885720jpfdc5liqcfm6s6@ds255787.mlab.com',55787);
-db = new Db('heroku_blss8xgp', server);
+// var server = new Server('mongodb://heroku_blss8xgp:jm8vu885720jpfdc5liqcfm6s6@ds255787.mlab.com',55787);
+// db = new Db('heroku_blss8xgp', server);
+
+db = MongoClient.connect(url);
 
 db.open(function(err, db) {
     if(!err) {
@@ -163,6 +165,7 @@ exports.deletetransaction = function(req, res) {
         });
     });
 }
+
 
 
 //sample data
